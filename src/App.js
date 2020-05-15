@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
+import About from './components/pages/About'
 import './App.css';
 import {v4 as uuid} from 'uuid';
 import peepo from './peepowide.png'
@@ -11,17 +13,17 @@ class App extends Component {
     todos: [
       {
         id: uuid(),
-        title: 'Take out the trash',
+        title: 'Install React and run basic setup',
         completed: false
       },
       {
         id: uuid(),
-        title: 'Dinner with wife',
+        title: 'Build Todo List app to create this list',
         completed: false
       },
       {
         id: uuid(),
-        title: 'Meeting with boss',
+        title: 'Learn more of the basic concepts of React library',
         completed: false
       }
     ]
@@ -54,15 +56,22 @@ class App extends Component {
 
     render() {
     return (
+      <Router>
       <div className="App">
         <div className="container">
-          <img src={peepo}/>
-          <Header />          
-          <AddTodo addTodo={this.addTodo}/>
-          <Todos todos={this.state.todos} markComplete={this.markComplete}
-            delTodo={this.delTodo}/>
+          <img src={peepo} alt="peepo"/>
+          <Header />   
+          <Route exact path="/" render={props => (
+            <React.Fragment>
+                <AddTodo addTodo={this.addTodo}/>
+                <Todos todos={this.state.todos} markComplete={this.markComplete}
+                       delTodo={this.delTodo}/>
+            </React.Fragment>
+          )}/>
+          <Route path="/about" component={About}/>                 
         </div>
       </div>
+      </Router>
     );
   }
 }
