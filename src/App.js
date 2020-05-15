@@ -8,6 +8,7 @@ import './App.css';
 import {v4 as uuid} from 'uuid';
 import peepo from './peepowide.png'
 
+
 class App extends Component {
   state = {
     todos: [
@@ -28,14 +29,19 @@ class App extends Component {
       }
     ]
   }
+    
     // Toggle Complete
-    markComplete = (id) => {
+    markComplete = async (id) => {
       this.setState({ todos: this.state.todos.map(todo => {
         if(todo.id === id){
           todo.completed = !todo.completed
         }
         return todo;
       }) });
+      const delay = ms => new Promise(res => setTimeout(res, ms));
+      await delay(5000);
+      this.setState({ todos: [...this.state.todos.filter(todo => todo.id
+        !== id)] });
     }
 
     // Delete Todo
@@ -53,7 +59,6 @@ class App extends Component {
       }
       this.setState({ todos: [...this.state.todos, newTodo] })
     }
-
     render() {
     return (
       <Router>
@@ -68,7 +73,7 @@ class App extends Component {
                        delTodo={this.delTodo}/>
             </React.Fragment>
           )}/>
-          <Route path="/about" component={About}/>                 
+          <Route exact path="/about" component={About}/>                 
         </div>
       </div>
       </Router>

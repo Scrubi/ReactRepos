@@ -6,13 +6,13 @@ function Header() {
         <header style={headerStyle}>
             <h1>Todo List</h1>
             <Link style={linkStyle} to="/">Home</Link> | <Link 
-            style={linkStyle} to=" /about">About</Link>
+            style={linkStyle} to="/about">About</Link>
         </header>
     )
 }
 
 const headerStyle = {
-    background: '#333',
+    background: '#2C3E50',
     color: '#fff',
     textAlign: 'center',
     padding: '10px'
